@@ -1,0 +1,68 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+  <h5 class="mb-0">Trabajadores</h5>
+  <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+          <a routerLink="/">
+              <i class="ri-home-8-line"></i>
+              Administración
+          </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Trabajador</li>
+  </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+      <h5 class="mb-0">Lista de Registros</h5>
+      <button type="button" mat-button class="position-relative btn bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
+          Filtros
+      </button>
+      <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
+          <button mat-menu-item type="button" class="bg-transparent border-none">Todos</button>
+          <button mat-menu-item type="button" class="bg-transparent border-none">Analistas TI</button>
+          <button mat-menu-item type="button" class="bg-transparent border-none">Coordinadores HD</button>
+      </mat-menu>
+  </mat-card-header>
+  <mat-card-content>
+      <div class="mat-elevation-z8 tagus-mat-table">
+          <table mat-table [dataSource]="data">
+              <!-- Order ID Column -->
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef class="text-start">ID</th>
+                  <td mat-cell *matCellDef="let element" class="fw-semibold text-start">{{element.idWorker}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="firstName">
+                  <th mat-header-cell *matHeaderCellDef class="text-start">Trabajador</th>
+                  <td mat-cell *matCellDef="let element" class="text-start">
+                      <a routerLink="/" class="d-flex align-items-center product-info">
+                          <img src="{{'data:image/jpg;base64,' + element.photo}}" alt="photo">
+                          {{element.firstName}}
+                          {{element.lastName}}
+                      </a>
+                  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="document">
+                  <th mat-header-cell *matHeaderCellDef>Dni</th>
+                  <td mat-cell *matCellDef="let element">{{element.document}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>Cargo</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="badge rounded-pill text-outline-dark">{{element.position}}</span>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+          >
+          </mat-paginator>
+      </div>
+  </mat-card-content>
+</mat-card>

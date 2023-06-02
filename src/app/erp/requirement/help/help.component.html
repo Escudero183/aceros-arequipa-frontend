@@ -1,0 +1,11 @@
+<h1>Módulo de Ayuda</h1>
+<select
+  class="input-control"
+  (change)="onOptionChange($event)"
+>
+  <option value="">Seleccione Opción</option>
+  <option value="1">Proyecto</option>
+  <option value="2">Mejora</option>
+  <option value="3">Configuracion</option>
+</select>
+<detail-component [optionShow]="optionSel"></detail-component>
